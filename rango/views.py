@@ -1,8 +1,18 @@
 from django.http import HttpResponse
-
+from django.template import RequestContext
+from django.shortcuts import render_to_response
 
 def index(request):
-    return HttpResponse("Rango says hello world! <br/><a href='/rango/about'>Link to about page</a>")
+    context = RequestContext(request)
+    context_dict = {
+        'boldmessage':'I am bold font from context'
+    }
+    return render_to_response('rango/index.html', context_dict, context)
 
 def about(request):
-    return HttpResponse("Here is the about page! <br/><a href='/rango/'>Link to home page</a>")
+    context = RequestContext(request)
+    context_dict = {
+        'username':'rahularora'
+    }
+
+    return render_to_response('rango/about.html', context_dict, context)
